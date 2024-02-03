@@ -1,0 +1,285 @@
+*{
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+body{
+    font-family: Poppins, sans-serif;
+    background-image: url(img/background.jpg);
+    background-repeat: no-repeat;
+    background-size: 100%;
+}
+
+
+/* Header */
+header{
+    display: flex;
+    justify-content: center;
+}
+
+.container{
+    position: absolute;
+    top: 0;
+    width: 15rem;
+    height: 3.5rem;
+    background-color: black;
+    border-radius: 0px 0px 19px 19px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.title{
+    width: 15rem;
+    position: absolute;
+    top : 0.6rem;
+    font-size: 1.5rem;
+    text-align: center;
+    left: 0rem;
+}
+.title a {
+    color : white;
+}
+#colorh1{
+    color : green;
+    text-align: center;
+    position: relative;
+    left: 0rem;
+}
+
+.nav-droite{
+    display: flex;
+    justify-content: space-between;
+    font-size: 1.3rem;
+    gap : 10rem;
+    position: relative;
+    top : 1rem;
+    left: 30rem;
+}
+.nav-gauche{
+    font-size: 1.3rem;
+    position: relative;
+    top : 1rem;
+    right : 30rem;
+}
+
+li{
+    list-style: none;
+}
+a{
+    text-decoration: none;
+    color : black;
+}
+a:hover{
+    color : white;
+}
+/* Contaienr principal */
+main{
+    display: flex;
+    justify-content: center;
+    font-family: Radio Canada, sans-serif;
+}
+
+.maincontainer {
+    width: 55rem;
+    height: 32rem;
+    background-color: rgba(255, 255, 255, 0.5);
+    border-radius: 10px;
+    font-size: 1.5rem;
+    position: relative;
+    margin-top: 9rem;
+    color : black;
+    display: flex;
+    justify-content: center;
+}
+
+.undercontainer {
+    position: absolute;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.45);
+    border-radius: 0 0 10px 10px;
+    width: 100%;
+    height: 9rem;
+    overflow: hidden;
+}
+
+.temperature{
+    font-size: 3.5rem;
+    position: absolute;
+    color : black;
+}
+
+.time{
+    font-size: 1.1rem;
+    position: absolute;
+    color : black;
+    left: 2rem;
+    top: 1rem;
+}
+.date{
+    font-size: 1.1rem;
+    position: absolute;
+    top: 2.5rem;
+    left: 2rem;
+    color : black;
+}
+.location{
+    font-size: 1.3rem;
+    position: absolute;
+    top: 2rem;
+    right: 2rem;
+    color : black;
+}
+#icnl{
+    position: absolute;
+    top: 2rem;
+    right: 5rem;
+}
+.tempartureicone{
+    position: absolute;
+    width: 14rem;
+    height: auto;
+    top : 4rem;
+    color : #FFC000;
+}
+.detail{
+    position: absolute;
+    top : 18rem;
+    font-size: 3.4rem;
+}
+/* Div pour chaque jour*/
+
+.info {
+    display: inline-block;
+    margin-left: 3rem;
+}
+.bigcont{
+    position: absolute;
+    left : 5rem;
+    top:0.5rem;
+    cursor: default;
+}
+.icont {
+    width: 4rem;
+    height: auto;
+    position: relative;
+    left: 0.5rem;
+}
+
+.temp {
+    position: relative;
+    left: 1rem;
+    color: white;
+    font-size: 1.4rem;
+}
+
+.border {
+    background: black;
+    width: 5rem;
+    height: 0.15rem;
+    border-radius: 50px;
+}
+
+.dayy {
+    color: white;
+    font-size: 1.4rem;
+}
+
+@media screen and (max-width: 900px){
+    body {
+        background-size: cover;
+        width: 100dvw;
+        height: 100dvh;
+      }
+    
+      header {
+        flex-direction: column;
+        align-items: center;
+      }
+    
+      .container {
+        position: relative;
+        width: 50%;
+        border-radius: 60px;
+        top : 1rem;
+        left: 0;
+      }
+    
+      .title {
+        position: relative;
+        left: 0;
+        margin-bottom: 1rem;
+      }
+    
+      .nav-droite,
+      .nav-gauche {
+        position: relative;
+        left: 0;
+        right: 0;
+        text-align: center;
+        gap: 2rem;
+        top: 1.5rem;
+      }
+    
+      .maincontainer {
+        width: 90dvw;
+        margin-top: 3rem;
+        height: 75vh;
+      }
+    
+      .undercontainer {
+        height: 23vh;
+
+      }
+      .date{
+        font-size : 1.5rem;
+        left : 5rem;
+        top : 0;
+        font-weight: 600;
+      }
+      .detail{
+        display: none;
+      }
+      .location{
+        font-size : 1.7rem;
+        left : 9rem;
+        top : 4rem;
+        font-weight: 600;
+      }
+
+      .tempartureicone{
+        top : 11rem;
+        width: 12rem;
+        height: auto;
+      }
+      .temperature{
+        font-size : 2.5rem;
+        top : 6rem;
+      }
+      #icnl{
+        display: none;
+      }
+      .time{
+        top : 25rem;
+        left : 8.7rem;
+        font-size : 1.7rem;
+        font-weight: 600;
+      }
+      .info{
+        margin : 0;
+        padding : 0;
+      }
+      .info:nth-child(3) {
+        display: none;
+      }
+      .info:nth-child(4) {
+        display: none;
+      }
+      .info{
+        position: relative;
+        left : -2rem;
+        top : 1rem;
+      }
+}
+  

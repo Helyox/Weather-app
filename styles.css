@@ -36,7 +36,6 @@ header{
     top : 0.6rem;
     font-size: 1.5rem;
     text-align: center;
-    left: 0rem;
 }
 .title a {
     color : white;
@@ -114,27 +113,19 @@ main{
     font-size: 1.1rem;
     position: absolute;
     color : black;
-    left: 2rem;
     top: 1rem;
 }
 .date{
     font-size: 1.1rem;
     position: absolute;
     top: 2.5rem;
-    left: 2rem;
     color : black;
 }
 .location{
     font-size: 1.3rem;
     position: absolute;
     top: 2rem;
-    right: 2rem;
     color : black;
-}
-#icnl{
-    position: absolute;
-    top: 2rem;
-    right: 5rem;
 }
 .tempartureicone{
     position: absolute;
@@ -155,10 +146,12 @@ main{
     margin-left: 3rem;
 }
 .bigcont{
-    position: absolute;
-    left : 5rem;
+    position: relative;
     top:0.5rem;
     cursor: default;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 .icont {
     width: 4rem;
@@ -186,6 +179,20 @@ main{
     font-size: 1.4rem;
 }
 
+@media screen and (min-width: 901px){
+  .time, .date{
+    left : 2rem;
+  }
+  .location{
+    right: 2rem;
+  }
+  body {
+    background-size: cover;
+    width: 100dvw;
+    height: 100dvh;
+  }
+}
+
 @media screen and (max-width: 900px){
     body {
         background-size: cover;
@@ -202,14 +209,14 @@ main{
         position: relative;
         width: 50%;
         border-radius: 60px;
-        top : 1rem;
-        left: 0;
+        top : 2vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
       }
     
       .title {
-        position: relative;
-        left: 0;
-        margin-bottom: 1rem;
+        position: absolute;
       }
     
       .nav-droite,
@@ -220,12 +227,13 @@ main{
         text-align: center;
         gap: 2rem;
         top: 1.5rem;
+        display: none;
       }
     
       .maincontainer {
         width: 90dvw;
-        margin-top: 3rem;
-        height: 75vh;
+        margin-top: 5.5vh;
+        height: 85vh;
       }
     
       .undercontainer {
@@ -234,37 +242,36 @@ main{
       }
       .date{
         font-size : 1.5rem;
-        left : 5rem;
         top : 0;
-        font-weight: 600;
+        font-weight: 500;
       }
       .detail{
         display: none;
       }
       .location{
         font-size : 1.7rem;
-        left : 9rem;
-        top : 4rem;
-        font-weight: 600;
+        top : 10vh;
+        font-weight: 500;
       }
 
       .tempartureicone{
-        top : 11rem;
+        top : 25vh;
         width: 12rem;
         height: auto;
       }
       .temperature{
         font-size : 2.5rem;
-        top : 6rem;
+        font-weight: 500;
+        top : 15vh;
       }
       #icnl{
         display: none;
       }
       .time{
-        top : 25rem;
-        left : 8.7rem;
+        top : 55vh;
         font-size : 1.7rem;
         font-weight: 600;
+        position: absolute;
       }
       .info{
         margin : 0;
@@ -276,10 +283,15 @@ main{
       .info:nth-child(4) {
         display: none;
       }
+      .bigcont{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
       .info{
         position: relative;
-        left : -2rem;
         top : 1rem;
+        margin-left: 5vw;
       }
 }
   

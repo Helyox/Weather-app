@@ -22,10 +22,10 @@ if ("geolocation" in navigator) {
           console.log("Latitude : " + latitude + ", Longitude : " + longitude);
           console.log("Nom de la ville : " + city);
 
-          var location = document.querySelector('#location');
-          location.innerText = city;
+          document.querySelector('#location').innerText = city;
           checkWeather();
-          weatherday()
+          weatherday();
+          
           // Vous pouvez utiliser les données de localisation comme vous le souhaitez ici
         })
         .catch(error => console.error("Erreur lors de la récupération du nom de la ville:", error));
@@ -95,22 +95,178 @@ else {
 const apiKeyy = 'f90969c90ca7190b0727b06230c77b9f';
 const apiUrls = "https://api.openweathermap.org/data/2.5/weather?units=metric&";
 
+let dataa;
+
 async function checkWeather(){
   const response = await fetch(apiUrls + `lat=${latitude}` + `&lon=${longitude}` + `&appid=${apiKeyy}`);
-  var data = await response.json();
+  var dataa = await response.json();
 
-  console.log(data);
+  console.log(dataa);
 
-  document.querySelector("#temperature").innerHTML = parseInt(data.main.temp) + "°C";
-  document.querySelector("#detail").innerHTML = data.weather[0].main;
+  document.querySelector("#temperature").innerHTML = parseInt(dataa.main.temp) + "°C";
+  document.querySelector("#detail").innerHTML = dataa.weather[0].main;
+
+  if (dataa.weather[0].main == "Clouds") {
+    // Créer un nouvel élément SVG avec les attributs nécessaires
+    var newSvg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+    newSvg.setAttribute("xmlns", "http://www.w3.org/2000/svg");
+    newSvg.setAttribute("viewBox", "0 0 24 24");
+    newSvg.setAttribute("fill", "none");
+    newSvg.setAttribute("stroke", "currentColor");
+    newSvg.setAttribute("stroke-width", "2");
+    newSvg.setAttribute("stroke-linecap", "round");
+    newSvg.setAttribute("stroke-linejoin", "round");
+    newSvg.setAttribute("class", "tempartureicone black");
+
+    // Créer le chemin à l'intérieur du nouvel élément SVG
+    var newPath = document.createElementNS("http://www.w3.org/2000/svg", "path");
+    newPath.setAttribute("d", "M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z");
+
+    // Ajouter le chemin au nouvel élément SVG
+    newSvg.appendChild(newPath);
+    var oldSvg = document.getElementById("sun");
+    oldSvg.replaceWith(newSvg);
+  }
+  else if (dataa.weather[0].main == "Rain") {
+    var newSvg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+    newSvg.setAttribute("xmlns", "http://www.w3.org/2000/svg");
+    newSvg.setAttribute("viewBox", "0 0 24 24");
+    newSvg.setAttribute("fill", "none");
+    newSvg.setAttribute("stroke", "currentColor");
+    newSvg.setAttribute("stroke-width", "2");
+    newSvg.setAttribute("stroke-linecap", "round");
+    newSvg.setAttribute("stroke-linejoin", "round");
+    newSvg.setAttribute("class", "tempartureicone black");
+
+    // Créer le chemin à l'intérieur du nouvel élément SVG
+    var newPath = document.createElementNS("http://www.w3.org/2000/svg", "path");
+    newPath.setAttribute("d", "M4 14.899A7 7 0 1 1 15.71 8h1.79a4.5 4.5 0 0 1 2.5 8.242");
+
+    newSvg.appendChild(newPath);
+    var oldSvg = document.getElementById("sun");
+    oldSvg.replaceWith(newSvg);
+  }
 
 }
 
-const apiUrlss = "https://api.open-meteo.com/v1/forecast?&current=temperature_2m,weather_code&hourly=temperature_2m,weather_code"
+/// avoir les prevision méteo
+
+const apiUrlss = "https://api.meteo-concept.com/api/forecast/daily?token=2c106a91659dbea4643708e392b7da6058588e0a2976e85a5495917a2cc66428";
 
 async function weatherday(){
-  const reps = await fetch(apiUrlss + `&latitude=${latitude}`+ `&longitude=${longitude}`);
+  const reps = await fetch(apiUrlss + `&latlng=${latitude},${longitude}`);
   var data = await reps.json();
 
   console.log(data);
-}
+  document.querySelector("#temp1").innerHTML = parseInt(data.forecast[1].tmax) + "°C";
+  document.querySelector("#temp2").innerHTML = parseInt(data.forecast[2].tmax) + "°C";
+  document.querySelector("#temp3").innerHTML = parseInt(data.forecast[3].tmax) + "°C";
+  document.querySelector("#temp4").innerHTML = parseInt(data.forecast[4].tmax) + "°C";
+  document.querySelector("#temp5").innerHTML = parseInt(data.forecast[5].tmax) + "°C";
+  
+  const conditionsMeteo = [
+    'Clouds',       // Nuages
+    'Clear',        // Dégagé
+    'Sun',          // Soleil
+    'Snow',         // Neige
+    'Rain',         // Pluie
+    'Thunderstorm', // Orage
+    'Showers',      // Averses
+    'Fog',          // Brouillard
+    'Wind',         // Vent
+    'Hail',         // Grêle
+    'Partly Cloudy',// Partiellement Nuageux
+    'Overcast'      // Ciel couvert
+  ];
+
+  
+  console.log("day 1 : " + weatherss[data.forecast[1].weather - 1]);
+  console.log(data.forecast[1].weather - 1);
+  if (data.forecast[1].weather - 1 >= 10 && data.forecast[1].weather - 1 <= 15 || ( data.forecast[1].weather - 1 >= 40 && data.forecast[1].weather - 1 <= 48)){
+    var newSvgg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+    newSvgg.setAttribute("xmlns", "http://www.w3.org/2000/svg");
+    newSvgg.setAttribute("viewBox", "0 0 24 24");
+    newSvgg.setAttribute("fill", "none");
+    newSvgg.setAttribute("stroke", "currentColor");
+    newSvgg.setAttribute("stroke-width", "2");
+    newSvgg.setAttribute("stroke-linecap", "round");
+    newSvgg.setAttribute("stroke-linejoin", "round");
+    newSvgg.setAttribute("class", "icont black");
+
+    // Créer le chemin à l'intérieur du nouvel élément SVG
+    var newPathh = document.createElementNS("http://www.w3.org/2000/svg", "path");
+    newPathh.setAttribute("d", "M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z");
+
+    // Ajouter le chemin au nouvel élément SVG
+    newSvgg.appendChild(newPathh);
+    var oldSvgg = document.getElementById("icont1");
+    oldSvgg.replaceWith(newSvgg);
+  }
+  
+  console.log("day 2 : " + weatherss[data.forecast[2].weather - 1]);
+  if (data.forecast[2].weather - 1 == 2 || data.forecast[2].weather - 1 == 3 || data.forecast[2].weather - 1 == 4){
+    var newSvgg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+    newSvgg.setAttribute("xmlns", "http://www.w3.org/2000/svg");
+    newSvgg.setAttribute("viewBox", "0 0 24 24");
+    newSvgg.setAttribute("fill", "none");
+    newSvgg.setAttribute("stroke", "currentColor");
+    newSvgg.setAttribute("stroke-width", "2");
+    newSvgg.setAttribute("stroke-linecap", "round");
+    newSvgg.setAttribute("stroke-linejoin", "round");
+    newSvgg.setAttribute("class", "icont black");
+
+    // Créer le chemin à l'intérieur du nouvel élément SVG
+    var newPathh = document.createElementNS("http://www.w3.org/2000/svg", "path");
+    newPathh.setAttribute("d", "M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z");
+
+    // Ajouter le chemin au nouvel élément SVG
+    newSvgg.appendChild(newPathh);
+    var oldSvgg = document.getElementById("icont2");
+    oldSvgg.replaceWith(newSvgg);
+  }
+
+  console.log("day 3 : " + weatherss[data.forecast[3].weather - 1]);
+  if (data.forecast[3].weather - 1 == 2 || data.forecast[3].weather - 1 == 3){
+    var newSvgg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+    newSvgg.setAttribute("xmlns", "http://www.w3.org/2000/svg");
+    newSvgg.setAttribute("viewBox", "0 0 24 24");
+    newSvgg.setAttribute("fill", "none");
+    newSvgg.setAttribute("stroke", "currentColor");
+    newSvgg.setAttribute("stroke-width", "2");
+    newSvgg.setAttribute("stroke-linecap", "round");
+    newSvgg.setAttribute("stroke-linejoin", "round");
+    newSvgg.setAttribute("class", "icont black");
+
+    // Créer le chemin à l'intérieur du nouvel élément SVG
+    var newPathh = document.createElementNS("http://www.w3.org/2000/svg", "path");
+    newPathh.setAttribute("d", "M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z");
+
+    // Ajouter le chemin au nouvel élément SVG
+    newSvgg.appendChild(newPathh);
+    var oldSvgg = document.getElementById("icont3");
+    oldSvgg.replaceWith(newSvgg);
+  }
+
+  if (data.forecast[3].weather - 1 == 9 || data.forecast[3].weather - 1 == 8){
+    var newSvgg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+    newSvgg.setAttribute("xmlns", "http://www.w3.org/2000/svg");
+    newSvgg.setAttribute("viewBox", "0 0 24 24");
+    newSvgg.setAttribute("fill", "none");
+    newSvgg.setAttribute("stroke", "currentColor");
+    newSvgg.setAttribute("stroke-width", "2");
+    newSvgg.setAttribute("stroke-linecap", "round");
+    newSvgg.setAttribute("stroke-linejoin", "round");
+    newSvgg.setAttribute("class", "icont black");
+
+    //PROBLEME le svg n'affiche pas la pluie //
+
+    // Créer le chemin à l'intérieur du nouvel élément SVG
+    var newPathh = document.createElementNS("http://www.w3.org/2000/svg", "path");
+    newPathh.setAttribute("d", "M4 14.899A7 7 0 1 1 15.71 8h1.79a4.5 4.5 0 0 1 2.5 8.242");
+
+    // Ajouter le chemin au nouvel élément SVG
+    newSvgg.appendChild(newPathh);
+    var oldSvgg = document.getElementById("icont3");
+    oldSvgg.replaceWith(newSvgg);
+  }
+};

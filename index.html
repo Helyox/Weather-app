@@ -6,6 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content=" to do list">
     <link rel="stylesheet" href="./styles.css">
+    <link rel="stylesheet" href="weather-icons/css/weather-icons-wind.css">
+    <link rel="stylesheet" href="weather-icons/css/weather-icons-wind.min.css">
+    <link rel="stylesheet" href="weather-icons/css/weather-icons.css">
+    <link rel="stylesheet" href="weather-icons/css/weather-icons.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Radio+Canada:ital,wght@0,300..700;1,300..700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
   </head>
@@ -28,36 +32,35 @@
         <p id="time" class="time">16:04</p>
         <p id="date" class="date">28 January 2023</p>
         <p id="location" class="location">Lyon</p>
-        <svg class="tempartureicone" id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-sun"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>
+        <i id="sun" class="tempartureicone wi wi-day-sunny"></i>
         <p id="detail" class="detail">Sunny</p>
         <div class="undercontainer">
           <div class="bigcont">
           <div class="info">
-            <svg class="icont" id="icont1" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-sun"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>
-            <p id="temp1" class="temp">21°C</p>
+            <i id="icont1" class="icont wi wi-day-sunny"></i>            <p id="temp1" class="temp">21°C</p>
             <div class="border"></div>
             <p id="day1" class="dayy">Monday</p>
         </div>
         <div class="info">
-          <svg class="icont" id="icont2" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-sun"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>
+          <i id="icont2" class="icont wi wi-day-sunny"></i>
           <p id="temp2" class="temp">21°C</p>
           <div class="border"></div>
           <p id="day2" class="dayy">Monday</p>
         </div>
         <div class="info">
-          <svg class="icont" id="icont3" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-sun"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>
+          <i id="icont3" class="icont wi wi-day-sunny"></i>
           <p id="temp3" class="temp">21°C</p>
           <div class="border"></div>
           <p id="day3" class="dayy">Monday</p>
         </div>
         <div class="info">
-          <svg class="icont" id="icont4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-sun"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>
+          <i id="icont4" class="icont wi wi-day-sunny"></i>
           <p id="temp4" class="temp">21°C</p>
           <div class="border"></div>
           <p id="day4" class="dayy">Monday</p>
         </div>
         <div class="info">
-          <svg class="icont" id="icont5" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-sun"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>
+          <i id="icont5" class="icont wi wi-day-sunny"></i>
           <p id="temp5" class="temp">21°C</p>
           <div class="border"></div>
           <p id="day5" class="dayy">Monday</p>

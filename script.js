@@ -105,52 +105,41 @@ async function checkWeather(){
 
   document.querySelector("#temperature").innerHTML = parseInt(dataa.main.temp) + "°C";
   document.querySelector("#detail").innerHTML = dataa.weather[0].main;
+  // mettre icon pr le soir pour le soleil
+  let timestampSunset = dataa.sys.sunset;
+  let dateSunset = new Date(timestampSunset * 1000); 
+
+  let options = { timeZone: 'UTC', hour12: false };
+  let heureSunset = dateSunset.toLocaleTimeString('fr-FR', options);
+
+  if (dataa.weather[0].main == "Clear" && heures >= heureSunset){
+    console.log("test")
+  }
 
   if (dataa.weather[0].main == "Clouds") {
-    // Créer un nouvel élément SVG avec les attributs nécessaires
-    var newSvg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
-    newSvg.setAttribute("xmlns", "http://www.w3.org/2000/svg");
-    newSvg.setAttribute("viewBox", "0 0 24 24");
-    newSvg.setAttribute("fill", "none");
-    newSvg.setAttribute("stroke", "currentColor");
-    newSvg.setAttribute("stroke-width", "2");
-    newSvg.setAttribute("stroke-linecap", "round");
-    newSvg.setAttribute("stroke-linejoin", "round");
-    newSvg.setAttribute("class", "tempartureicone black");
-
-    // Créer le chemin à l'intérieur du nouvel élément SVG
-    var newPath = document.createElementNS("http://www.w3.org/2000/svg", "path");
-    newPath.setAttribute("d", "M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z");
-
-    // Ajouter le chemin au nouvel élément SVG
-    newSvg.appendChild(newPath);
-    var oldSvg = document.getElementById("sun");
-    oldSvg.replaceWith(newSvg);
+    var sunIcon = document.getElementById("sun");
+    sunIcon.classList.remove("wi-day-sunny");
+    sunIcon.classList.add("wi-cloud");
+    sunIcon.classList.add("black");
+    sunIcon.classList.add("lever");
+  }
+  if (dataa.weather[0].main == "Snow") {
+    var sunIcon = document.getElementById("sun");
+    sunIcon.classList.remove("wi-day-sunny");
+    sunIcon.classList.add("wi-snow");
+    sunIcon.classList.add("black");
+    sunIcon.classList.add("lever");
   }
   else if (dataa.weather[0].main == "Rain") {
-    var newSvg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
-    newSvg.setAttribute("xmlns", "http://www.w3.org/2000/svg");
-    newSvg.setAttribute("viewBox", "0 0 24 24");
-    newSvg.setAttribute("fill", "none");
-    newSvg.setAttribute("stroke", "currentColor");
-    newSvg.setAttribute("stroke-width", "2");
-    newSvg.setAttribute("stroke-linecap", "round");
-    newSvg.setAttribute("stroke-linejoin", "round");
-    newSvg.setAttribute("class", "tempartureicone black");
-
-    // Créer le chemin à l'intérieur du nouvel élément SVG
-    var newPath = document.createElementNS("http://www.w3.org/2000/svg", "path");
-    newPath.setAttribute("d", "M4 14.899A7 7 0 1 1 15.71 8h1.79a4.5 4.5 0 0 1 2.5 8.242");
-
-    newSvg.appendChild(newPath);
-    var oldSvg = document.getElementById("sun");
-    oldSvg.replaceWith(newSvg);
-  }
-
+    var sunIcon = document.getElementById("sun");
+    sunIcon.classList.remove("wi-day-sunny");
+    sunIcon.classList.add("wi-rain");
+    sunIcon.classList.add("black");
+    sunIcon.classList.add("lever");
 }
+};
 
-/// avoir les prevision méteo
-
+// avoir les prevision méteo
 const apiUrlss = "https://api.meteo-concept.com/api/forecast/daily?token=2c106a91659dbea4643708e392b7da6058588e0a2976e85a5495917a2cc66428";
 
 async function weatherday(){
@@ -164,109 +153,200 @@ async function weatherday(){
   document.querySelector("#temp4").innerHTML = parseInt(data.forecast[4].tmax) + "°C";
   document.querySelector("#temp5").innerHTML = parseInt(data.forecast[5].tmax) + "°C";
   
-  const conditionsMeteo = [
-    'Clouds',       // Nuages
-    'Clear',        // Dégagé
-    'Sun',          // Soleil
-    'Snow',         // Neige
-    'Rain',         // Pluie
-    'Thunderstorm', // Orage
-    'Showers',      // Averses
-    'Fog',          // Brouillard
-    'Wind',         // Vent
-    'Hail',         // Grêle
-    'Partly Cloudy',// Partiellement Nuageux
-    'Overcast'      // Ciel couvert
-  ];
+  //Jour +1
+  console.log("day 1 : " + parseInt(data.forecast[1].tmax) + "°C " + data.forecast[1].weather);
+  var weatherCode1 = parseInt(data.forecast[1].weather);
+// La pluie
+if ((weatherCode1 >= 10 && weatherCode1 <= 15) || (weatherCode1 >= 40 && weatherCode1 <= 48) || (weatherCode1 >= 70 && weatherCode1 <= 78) || (weatherCode1 >= 140 && weatherCode1 <= 212)) {
+    var Icon = document.getElementById("icont1");
+    Icon.classList.remove("wi-day-sunny");
+    Icon.classList.add("wi-rain");
+    Icon.classList.add("black");
+};
 
-  
-  console.log("day 1 : " + weatherss[data.forecast[1].weather - 1]);
-  console.log(data.forecast[1].weather - 1);
-  if (data.forecast[1].weather - 1 >= 10 && data.forecast[1].weather - 1 <= 15 || ( data.forecast[1].weather - 1 >= 40 && data.forecast[1].weather - 1 <= 48)){
-    var newSvgg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
-    newSvgg.setAttribute("xmlns", "http://www.w3.org/2000/svg");
-    newSvgg.setAttribute("viewBox", "0 0 24 24");
-    newSvgg.setAttribute("fill", "none");
-    newSvgg.setAttribute("stroke", "currentColor");
-    newSvgg.setAttribute("stroke-width", "2");
-    newSvgg.setAttribute("stroke-linecap", "round");
-    newSvgg.setAttribute("stroke-linejoin", "round");
-    newSvgg.setAttribute("class", "icont black");
+//Orages
+if (weatherCode1 >= 100 && weatherCode1 <= 138) {
+  var Icon = document.getElementById("icont1");
+  Icon.classList.remove("wi-day-sunny");
+  Icon.classList.add("wi-day-storm-showers");
+  Icon.classList.add("black");
+};
+//Ciel voilé
+if (weatherCode1 == 2 ) {
+  var Icon = document.getElementById("icont1");
+  Icon.classList.remove("wi-day-sunny");
+  Icon.classList.add("wi-day-cloudy");
+  Icon.classList.add("black");
+};
+// Nuages
+if ((weatherCode1 == 1) || (weatherCode1 >= 3 && weatherCode1 <= 7)) {
+  var Icon = document.getElementById("icont1");
+  Icon.classList.remove("wi-day-sunny");
+  Icon.classList.add("wi-cloud");
+  Icon.classList.add("black");
+};
+//Neiges
+if ((weatherCode1 >= 20 && weatherCode1 <= 22) || (weatherCode1 >= 60 && weatherCode1 <= 68 || (weatherCode1 >= 220 && weatherCode1 <= 222)) ) {
+  var Icon = document.getElementById("icont1");
+  Icon.classList.remove("wi-day-sunny");
+  Icon.classList.add("wi-snow");
+  Icon.classList.add("black");
+};
 
-    // Créer le chemin à l'intérieur du nouvel élément SVG
-    var newPathh = document.createElementNS("http://www.w3.org/2000/svg", "path");
-    newPathh.setAttribute("d", "M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z");
+// bien mettre mes if avec les chiffres qu'ils faut, je le fait pour le jour 1 et après juste je copie colle
+console.log("day 2 : " + parseInt(data.forecast[2].tmax) + "°C " + data.forecast[2].weather);
+  // La pluie
+  var weatherCode2 = parseInt(data.forecast[2].weather);
+if ((weatherCode2 >= 10 && weatherCode2 <= 15) || (weatherCode2 >= 40 && weatherCode2 <= 48) || (weatherCode2 >= 70 && weatherCode2 <= 78) || (weatherCode2 >= 140 && weatherCode2 <= 212)) {
+  var Icon = document.getElementById("icont2");
+  Icon.classList.remove("wi-day-sunny");
+  Icon.classList.add("wi-rain");
+  Icon.classList.add("black");
+};
 
-    // Ajouter le chemin au nouvel élément SVG
-    newSvgg.appendChild(newPathh);
-    var oldSvgg = document.getElementById("icont1");
-    oldSvgg.replaceWith(newSvgg);
-  }
-  
-  console.log("day 2 : " + weatherss[data.forecast[2].weather - 1]);
-  if (data.forecast[2].weather - 1 == 2 || data.forecast[2].weather - 1 == 3 || data.forecast[2].weather - 1 == 4){
-    var newSvgg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
-    newSvgg.setAttribute("xmlns", "http://www.w3.org/2000/svg");
-    newSvgg.setAttribute("viewBox", "0 0 24 24");
-    newSvgg.setAttribute("fill", "none");
-    newSvgg.setAttribute("stroke", "currentColor");
-    newSvgg.setAttribute("stroke-width", "2");
-    newSvgg.setAttribute("stroke-linecap", "round");
-    newSvgg.setAttribute("stroke-linejoin", "round");
-    newSvgg.setAttribute("class", "icont black");
+//Orages
+if (weatherCode2 >= 100 && weatherCode2 <= 138) {
+var Icon = document.getElementById("icont2");
+Icon.classList.remove("wi-day-sunny");
+Icon.classList.add("wi-day-storm-showers");
+Icon.classList.add("black");
+};
+//Ciel voilé
+if (weatherCode2 == 2 ) {
+var Icon = document.getElementById("icont2");
+Icon.classList.remove("wi-day-sunny");
+Icon.classList.add("wi-day-cloudy");
+Icon.classList.add("black");
+};
+// Nuages
+if ((weatherCode2 == 1) || (weatherCode2 >= 3 && weatherCode2 <= 7)) {
+var Icon = document.getElementById("icont2");
+Icon.classList.remove("wi-day-sunny");
+Icon.classList.add("wi-cloud");
+Icon.classList.add("black");
+};
+//Neiges
+if ((weatherCode2 >= 20 && weatherCode2 <= 22) || (weatherCode2 >= 60 && weatherCode2 <= 68) || (weatherCode2 >= 220 && weatherCode2 <= 222))  {
+var Icon = document.getElementById("icont2");
+Icon.classList.remove("wi-day-sunny");
+Icon.classList.add("wi-snow");
+Icon.classList.add("black");
+}
 
-    // Créer le chemin à l'intérieur du nouvel élément SVG
-    var newPathh = document.createElementNS("http://www.w3.org/2000/svg", "path");
-    newPathh.setAttribute("d", "M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z");
+console.log("day 3 : " + parseInt(data.forecast[3].tmax) + "°C " + data.forecast[3].weather);
+  // La pluie
+  var weatherCode3 = parseInt(data.forecast[3].weather);
+if ((weatherCode3 >= 10 && weatherCode3 <= 15) || (weatherCode3 >= 40 && weatherCode3 <= 48) || (weatherCode3 >= 70 && weatherCode3 <= 78) || (weatherCode3 >= 140 && weatherCode3 <= 212)) {
+  var Icon = document.getElementById("icont3");
+  Icon.classList.remove("wi-day-sunny");
+  Icon.classList.add("wi-rain");
+  Icon.classList.add("black");
+};
 
-    // Ajouter le chemin au nouvel élément SVG
-    newSvgg.appendChild(newPathh);
-    var oldSvgg = document.getElementById("icont2");
-    oldSvgg.replaceWith(newSvgg);
-  }
+//Orages
+if (weatherCode3 >= 100 && weatherCode3 <= 138) {
+var Icon = document.getElementById("icont3");
+Icon.classList.remove("wi-day-sunny");
+Icon.classList.add("wi-day-storm-showers");
+Icon.classList.add("black");
+};
+//Ciel voilé
+if (weatherCode3 == 2 ) {
+var Icon = document.getElementById("icont3");
+Icon.classList.remove("wi-day-sunny");
+Icon.classList.add("wi-day-cloudy");
+Icon.classList.add("black");
+};
+// Nuages
+if ((weatherCode3 == 1) || (weatherCode3 >= 3 && weatherCode3 <= 7)) {
+var Icon = document.getElementById("icont3");
+Icon.classList.remove("wi-day-sunny");
+Icon.classList.add("wi-cloud");
+Icon.classList.add("black");
+};
+//Neiges
+if ((weatherCode3 >= 20 && weatherCode3 <= 22) || (weatherCode3 >= 60 && weatherCode3 <= 68) || (weatherCode3 >= 220 && weatherCode3 <= 222))  {
+var Icon = document.getElementById("icont3");
+Icon.classList.remove("wi-day-sunny");
+Icon.classList.add("wi-snow");
+Icon.classList.add("black");
+}
 
-  console.log("day 3 : " + weatherss[data.forecast[3].weather - 1]);
-  if (data.forecast[3].weather - 1 == 2 || data.forecast[3].weather - 1 == 3){
-    var newSvgg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
-    newSvgg.setAttribute("xmlns", "http://www.w3.org/2000/svg");
-    newSvgg.setAttribute("viewBox", "0 0 24 24");
-    newSvgg.setAttribute("fill", "none");
-    newSvgg.setAttribute("stroke", "currentColor");
-    newSvgg.setAttribute("stroke-width", "2");
-    newSvgg.setAttribute("stroke-linecap", "round");
-    newSvgg.setAttribute("stroke-linejoin", "round");
-    newSvgg.setAttribute("class", "icont black");
+console.log("day 4 : " + parseInt(data.forecast[4].tmax) + "°C " + data.forecast[4].weather);
+  // La pluie
+  var weatherCode4 = parseInt(data.forecast[4].weather);
+if ((weatherCode4 >= 10 && weatherCode4 <= 15) || (weatherCode4 >= 40 && weatherCode4 <= 48) || (weatherCode4 >= 70 && weatherCode4 <= 78) || (weatherCode4 >= 140 && weatherCode4 <= 212)) {
+  var Icon = document.getElementById("icont4");
+  Icon.classList.remove("wi-day-sunny");
+  Icon.classList.add("wi-rain");
+  Icon.classList.add("black");
+};
 
-    // Créer le chemin à l'intérieur du nouvel élément SVG
-    var newPathh = document.createElementNS("http://www.w3.org/2000/svg", "path");
-    newPathh.setAttribute("d", "M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z");
+//Orages
+if (weatherCode4 >= 100 && weatherCode4 <= 138) {
+var Icon = document.getElementById("icont4");
+Icon.classList.remove("wi-day-sunny");
+Icon.classList.add("wi-day-storm-showers");
+Icon.classList.add("black");
+};
+//Ciel voilé
+if (weatherCode4 == 2 ) {
+var Icon = document.getElementById("icont4");
+Icon.classList.remove("wi-day-sunny");
+Icon.classList.add("wi-day-cloudy");
+Icon.classList.add("black");
+};
+// Nuages
+if ((weatherCode4 == 1) || (weatherCode4 >= 3 && weatherCode4 <= 7)) {
+var Icon = document.getElementById("icont4");
+Icon.classList.remove("wi-day-sunny");
+Icon.classList.add("wi-cloud");
+Icon.classList.add("black");
+};
+//Neiges
+if ((weatherCode4 >= 20 && weatherCode4 <= 22) || (weatherCode4 >= 60 && weatherCode4 <= 68) || (weatherCode4 >= 220 && weatherCode4 <= 222)) {
+var Icon = document.getElementById("icont4");
+Icon.classList.remove("wi-day-sunny");
+Icon.classList.add("wi-snow");
+Icon.classList.add("black");
+}
 
-    // Ajouter le chemin au nouvel élément SVG
-    newSvgg.appendChild(newPathh);
-    var oldSvgg = document.getElementById("icont3");
-    oldSvgg.replaceWith(newSvgg);
-  }
+console.log("day 5 : " + parseInt(data.forecast[5].tmax) + "°C " + data.forecast[5].weather);
+  // La pluie
+  var weatherCode5 = parseInt(data.forecast[5].weather);
+if ((weatherCode5 >= 10 && weatherCode5 <= 15) || (weatherCode5 >= 40 && weatherCode5 <= 48) || (weatherCode5 >= 70 && weatherCode5 <= 78) || (weatherCode5 >= 140 && weatherCode5 <= 212)) {
+  var Icon = document.getElementById("icont5");
+  Icon.classList.remove("wi-day-sunny");
+  Icon.classList.add("wi-rain");
+  Icon.classList.add("black");
+};
 
-  if (data.forecast[3].weather - 1 == 9 || data.forecast[3].weather - 1 == 8){
-    var newSvgg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
-    newSvgg.setAttribute("xmlns", "http://www.w3.org/2000/svg");
-    newSvgg.setAttribute("viewBox", "0 0 24 24");
-    newSvgg.setAttribute("fill", "none");
-    newSvgg.setAttribute("stroke", "currentColor");
-    newSvgg.setAttribute("stroke-width", "2");
-    newSvgg.setAttribute("stroke-linecap", "round");
-    newSvgg.setAttribute("stroke-linejoin", "round");
-    newSvgg.setAttribute("class", "icont black");
-
-    //PROBLEME le svg n'affiche pas la pluie //
-
-    // Créer le chemin à l'intérieur du nouvel élément SVG
-    var newPathh = document.createElementNS("http://www.w3.org/2000/svg", "path");
-    newPathh.setAttribute("d", "M4 14.899A7 7 0 1 1 15.71 8h1.79a4.5 4.5 0 0 1 2.5 8.242");
-
-    // Ajouter le chemin au nouvel élément SVG
-    newSvgg.appendChild(newPathh);
-    var oldSvgg = document.getElementById("icont3");
-    oldSvgg.replaceWith(newSvgg);
-  }
+//Orages
+if (weatherCode5 >= 100 && weatherCode5 <= 138) {
+var Icon = document.getElementById("icont5");
+Icon.classList.remove("wi-day-sunny");
+Icon.classList.add("wi-day-storm-showers");
+Icon.classList.add("black");
+};
+//Ciel voilé
+if (weatherCode5 == 2 ) {
+var Icon = document.getElementById("icont5");
+Icon.classList.remove("wi-day-sunny");
+Icon.classList.add("wi-day-cloudy");
+Icon.classList.add("black");
+};
+// Nuages
+if ((weatherCode5 == 1) || (weatherCode5 >= 3 && weatherCode5 <= 7)) {
+var Icon = document.getElementById("icont5");
+Icon.classList.remove("wi-day-sunny");
+Icon.classList.add("wi-cloud");
+Icon.classList.add("black");
+};
+//Neiges
+if ((weatherCode5 >= 20 && weatherCode5 <= 22) || (weatherCode5 >= 60 && weatherCode5 <= 68) || (weatherCode5 >= 220 && weatherCode5 <= 222))  {
+var Icon = document.getElementById("icont5");
+Icon.classList.remove("wi-day-sunny");
+Icon.classList.add("wi-snow");
+Icon.classList.add("black");
+}
 };

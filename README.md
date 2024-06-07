@@ -10,9 +10,3 @@ This web application displays the current weather and forecasts for the upcoming
 - Shows the current date and time.
 - Displays the current weather (temperature, weather conditions).
 - Shows weather forecasts for the next five days.
-
-## Installation
-
-1. Clone the repository:
-   ```sh
-   git clone https://github.com/yourusername/weather-web-app.git
